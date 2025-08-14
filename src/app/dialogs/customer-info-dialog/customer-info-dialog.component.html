@@ -1,0 +1,105 @@
+
+
+ <h2 mat-dialog-title>Müşteri Ek Bilgiler</h2>
+ <mat-dialog-content class="mat-typography">
+ <!--
+        <form [formGroup]="form">
+         <div formArrayName="questionAndAnswers">
+           <div
+             *ngFor="
+               let questionAndAnswer of questionAndAnswers.controls;
+               let i = index">
+             <div [formGroupName]="i">
+               <mat-form-field appearance="outline" class="model-full-input" questionAndAnswer.value.id >
+                 <mat-label>{{questionAndAnswer.value.questionText}}</mat-label>
+                 <input matInput placeholder="Örnek Fiyat : 500TL" formControlName="answer" [value]="questionAndAnswer.value.phoneCost">
+                 <mat-icon matSuffix>money</mat-icon>
+             </mat-form-field>
+             </div>           
+           </div>
+         </div>
+       </form>
+ -->
+
+<div class="row">
+    <div class="col-md-6">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Kullanılmayan Fonksiyonları</mat-label>
+            <textarea matInput  [value]="customerPhoneDescription"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Adres</mat-label>
+          <textarea matInput  [value]="customerAddress"></textarea>
+      </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Mail Adresi</mat-label>
+      <input matInput  [value]="customerMail">
+  </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>TC Kimlik No</mat-label>
+      <input matInput  [value]="customerTC">
+  </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Telefon Teklifi</mat-label>
+      <input matInput  [value]="customerPhoneCost">
+  </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Toplam Maliyet</mat-label>
+      <input matInput  [value]="customerTotalCost">
+  </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Ülke</mat-label>
+      <input matInput  [value]="countryName">
+  </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Şehir</mat-label>
+      <input matInput  [value]="cityName">
+  </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>İlçe</mat-label>
+      <input matInput  [value]="districtName">
+  </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Referans Kodu</mat-label>
+      <input matInput  [value]="customerReferenceCode">
+  </mat-form-field>
+  </div>
+  <div class="col-md-12">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>IBAN Numarası</mat-label>
+      <input matInput  [value]="customerIBAN">
+  </mat-form-field>
+  </div>
+</div>
+
+
+ </mat-dialog-content>
+ <mat-dialog-actions align="end">
+  <button mat-button [disabled]="this.didsendCustomerGSM" mat-dialog-close color="primary" (click)="sendSMS()">{{message}}<mat-icon>{{iconTXT}}</mat-icon></button>
+   <button mat-button color="warn" mat-dialog-close>Kapat</button>
+ </mat-dialog-actions>
+ 
+ 
+ 
+ 
+ 
+  
+ 

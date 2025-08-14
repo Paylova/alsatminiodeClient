@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="mat-elevation-z8">
+      <mat-form-field appearance="standard" class="mat-filter">
+        <mat-label>Arama</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Bir şeyler Yazın" #input>
+      </mat-form-field>
+        <table mat-table [dataSource]="dataSource">
+      
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>  Adı </th>
+            <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
+          </ng-container>
+      
+
+          <ng-container matColumnDef="customerSurname">
+            <th mat-header-cell *matHeaderCellDef>  Soyadı </th>
+            <td mat-cell *matCellDef="let element"> {{element.customerSurname}} </td>
+          </ng-container>
+      
+
+          <ng-container matColumnDef="customerGSM">
+            <th mat-header-cell *matHeaderCellDef> Telefon Numarası </th>
+            <td mat-cell *matCellDef="let element"> {{element.customerGSM}} </td>
+          </ng-container>
+      
+
+          <ng-container matColumnDef="customerPhoneIMEI">
+            <th mat-header-cell *matHeaderCellDef > IMEI </th>
+            <td mat-cell *matCellDef="let element"> {{element.customerPhoneIMEI}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerPaymentChoose">
+            <th mat-header-cell *matHeaderCellDef > Ödeme Şekli </th>
+            <td mat-cell *matCellDef="let element"> {{element.customerPaymentChoose}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="brandName">
+            <th mat-header-cell *matHeaderCellDef > Telefon Markası </th>
+            <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="modelName">
+            <th mat-header-cell *matHeaderCellDef > Telefon Modeli </th>
+            <td mat-cell *matCellDef="let element"> {{element.modelName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="createdDate">
+            <th mat-header-cell *matHeaderCellDef > Kullanıcı Kayıt Tarihi </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phoneSituation">
+            <th mat-header-cell *matHeaderCellDef > Telefonun Durumu </th>
+            <td mat-cell *matCellDef="let element"> {{element.phoneSituation}} </td>
+
+  
+
+          </ng-container>
+          <!--
+            <ng-container matColumnDef="updatedDate">
+            <th mat-header-cell *matHeaderCellDef > Güncellenme Tarihi </th>
+            <td mat-cell *matCellDef="let element"> {{element.updatedDate}} </td>
+          </ng-container>
+          -->
+          
+          <!--
+            <ng-container matColumnDef="deleteColumn" >
+            <th mat-header-cell *matHeaderCellDef > Silme işlemi </th>
+            <td [id]="element.id" mat-cell *matCellDef="let element" appDelete (callback)="getCustomers" controller="Customer">
+              <span class="material-icons" >delete</span> </td>
+          </ng-container>
+          -->
+          
+          <ng-container matColumnDef="updateColumn" >
+            <th mat-header-cell *matHeaderCellDef > Ekstra Bilgiler </th>
+            <td mat-cell *matCellDef="let element"
+             ><mat-icon style="cursor: pointer;" (click)="showCustomerDetails(element.id)">info</mat-icon></td>
+          </ng-container>
+
+          <ng-container matColumnDef="phoneStiuationUpdate" >
+            <th mat-header-cell *matHeaderCellDef>Kargo Güncelle</th>
+            <td mat-cell *matCellDef="let element"
+            ><mat-icon style="cursor: pointer;" (click)="updatePhoneSituationDetail(element.id)">update</mat-icon></td>
+          </ng-container>
+
+          <ng-container matColumnDef="deleteColumn" >
+            <th mat-header-cell *matHeaderCellDef > Silme işlemi </th>
+            <td [id]="element.id" mat-cell *matCellDef="let element" appDelete (callback)="getCustomers" controller="Customer">
+              <!--<span class="material-icons" >delete</span>--> </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator (page) = "pageChanged()"
+                       [pageSizeOptions]="[20, 50, 100]"
+                       showFirstLastButtons 
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+      
+</div>

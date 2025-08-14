@@ -1,0 +1,27 @@
+
+
+ <h2 mat-dialog-title>Ülke Düzenle</h2>
+ <mat-dialog-content class="mat-typography">
+
+<div class="row">
+  <div class="col-md-12">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Mail Adresi</mat-label>
+      <input matInput [value]="countryName" #countryNameInput>
+  </mat-form-field>
+  </div>
+</div>
+
+
+ </mat-dialog-content>
+ <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="updateCountry(countryNameInput)">Kaydet</button>
+   <button mat-button color="warn" mat-dialog-close>Kapat</button>
+ </mat-dialog-actions>
+ 
+ 
+ 
+ 
+ 
+  
+ 

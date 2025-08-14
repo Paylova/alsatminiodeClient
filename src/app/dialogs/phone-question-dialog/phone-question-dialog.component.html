@@ -1,0 +1,33 @@
+
+
+ <h2 mat-dialog-title>Telefon Soruları</h2>
+<mat-dialog-content class="mat-typography">
+
+        <form [formGroup]="form">
+        <div formArrayName="questionAndAnswers">
+          <div
+            *ngFor="
+              let questionAndAnswer of questionAndAnswers.controls;
+              let i = index">
+            <div [formGroupName]="i">
+              <mat-form-field appearance="outline" class="model-full-input" questionAndAnswer.value.id >
+                <mat-label>{{questionAndAnswer.value.questionText}}</mat-label>
+                <input matInput placeholder="Örnek Fiyat : 500TL" formControlName="answer" [value]="questionAndAnswer.value.phoneCost">
+                <mat-icon matSuffix>money</mat-icon>
+            </mat-form-field>
+            </div>           
+          </div>
+        </div>
+      </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="save()">Kaydet</button>
+  <button mat-button mat-dialog-close>Vazgeç</button>
+</mat-dialog-actions>
+
+
+
+
+
+ 

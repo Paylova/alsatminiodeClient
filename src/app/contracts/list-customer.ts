@@ -1,0 +1,23 @@
+export class ListCustomer{
+    customerName : string;
+    customerSurname : string;
+    customerTC : string;
+    //customerBirthDate : string;
+    customerMail : string;
+    customerGSM : string;
+    customerAddress : string;
+    customerPhoneIMEI : string;
+    customerIBAN : string;
+    customerPhoneDescription : string;
+    customerPaymentChoose : string;
+    customerReferenceCode : string;
+    customerTotalCost : number;
+    customerPhoneCost : number;
+    brandName : string;
+    modelName : string;
+    countryName : string;
+    cityName : string;
+    districtName : string;
+    phoneSituation : string;
+    didsendCustomerGSM : boolean;
+}

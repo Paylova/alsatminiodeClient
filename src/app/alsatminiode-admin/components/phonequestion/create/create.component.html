@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-12">
+        <mat-form-field appearance="fill" class="question-full-input">
+            <mat-label>Soru</mat-label>
+            <input matInput placeholder="Örnek : Telefonun Camı Kırık mı ?" #questionText/>
+        </mat-form-field>
+    </div>
+    <div class="col-md-12">
+        <button mat-raised-button color="primary" class="question-full-input" (click)="create(questionText)">Ekle</button>
+    </div>
+</div>

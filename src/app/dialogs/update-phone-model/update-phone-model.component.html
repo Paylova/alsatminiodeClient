@@ -1,0 +1,39 @@
+
+
+ <h2 mat-dialog-title>Telefon Düzenle</h2>
+ <mat-dialog-content class="mat-typography">
+
+<div class="row">
+    <div class="col-md-12">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Telefon Adı</mat-label>
+          <input matInput [value]="modelName" #modelNameInput>
+      </mat-form-field>
+      </div>
+  <div class="col-md-12">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Telefon Fiyatı</mat-label>
+      <input matInput [value]="modelFirstPrice" #modelFirstPriceInput>
+  </mat-form-field>
+  </div>
+  <div class="col-md-12">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Telefon Son Fiyatı</mat-label>
+      <input matInput [value]="modelLastPrice" #modelLastPriceInput>
+  </mat-form-field>
+  </div>
+</div>
+
+
+ </mat-dialog-content>
+ <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="updateModel(modelNameInput,modelFirstPriceInput,modelLastPriceInput)">Kaydet</button>
+   <button mat-button color="warn" mat-dialog-close>Kapat</button>
+ </mat-dialog-actions>
+ 
+ 
+ 
+ 
+ 
+  
+ 

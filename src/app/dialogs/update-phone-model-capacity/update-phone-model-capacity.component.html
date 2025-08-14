@@ -1,0 +1,33 @@
+
+
+ <h2 mat-dialog-title>Telefon Kapasite Düzenle</h2>
+ <mat-dialog-content class="mat-typography">
+
+<div class="row">
+    <div class="col-md-12">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Kapasite</mat-label>
+          <input matInput [value]="modelName" #phoneModelCapacityName>
+      </mat-form-field>
+      </div>
+  <div class="col-md-12">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Fiyat Farkı</mat-label>
+      <input matInput [value]="capacityPrice" #phoneModelCapacityPrice>
+  </mat-form-field>
+  </div>
+</div>
+
+
+ </mat-dialog-content>
+ <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="updateModel(phoneModelCapacityName,phoneModelCapacityPrice)">Kaydet</button>
+   <button mat-button color="warn" mat-dialog-close>Kapat</button>
+ </mat-dialog-actions>
+ 
+ 
+ 
+ 
+ 
+  
+ 

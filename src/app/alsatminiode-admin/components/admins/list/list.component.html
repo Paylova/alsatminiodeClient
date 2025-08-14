@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+      
+          <ng-container matColumnDef="adminName">
+            <th mat-header-cell *matHeaderCellDef>  Adı </th>
+            <td mat-cell *matCellDef="let element"> {{element.adminName}} </td>
+          </ng-container>
+      
+
+          <ng-container matColumnDef="adminSurname">
+            <th mat-header-cell *matHeaderCellDef>  Soyadı </th>
+            <td mat-cell *matCellDef="let element"> {{element.adminSurname}} </td>
+          </ng-container>
+      
+
+          <ng-container matColumnDef="adminUsername">
+            <th mat-header-cell *matHeaderCellDef> KullanıcıAdı </th>
+            <td mat-cell *matCellDef="let element"> {{element.adminUsername}} </td>
+          </ng-container>
+      
+
+          <ng-container matColumnDef="adminPassword">
+            <th mat-header-cell *matHeaderCellDef > Şifresi </th>
+            <td mat-cell *matCellDef="let element"> {{element.adminPassword}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="adminGSM">
+            <th mat-header-cell *matHeaderCellDef > Telefon Numarası </th>
+            <td mat-cell *matCellDef="let element"> {{element.adminGSM}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="adminMail">
+            <th mat-header-cell *matHeaderCellDef > Mail Adresi </th>
+            <td mat-cell *matCellDef="let element"> {{element.adminMail}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdDate">
+            <th mat-header-cell *matHeaderCellDef > Eklenme Tarihi </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updatedDate">
+            <th mat-header-cell *matHeaderCellDef > Güncellenme Tarihi </th>
+            <td mat-cell *matCellDef="let element"> {{element.updatedDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="deleteColumn" >
+            <th mat-header-cell *matHeaderCellDef > Silme işlemi </th>
+            <td [id]="element.id" mat-cell *matCellDef="let element" appDelete (callback)="getAdmins" controller="Admin">
+              <!--<span class="material-icons" >delete</span>--> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updateColumn" >
+            <th mat-header-cell *matHeaderCellDef > Güncelleme işlemi </th>
+            <td mat-cell *matCellDef="let element"
+             ><mat-icon>edit</mat-icon></td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator (page) = "pageChanged()"
+                       [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons 
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+      
+</div>

@@ -1,0 +1,31 @@
+
+
+ <h2 mat-dialog-title>Kargo Durumu Güncelle</h2>
+ <mat-dialog-content class="mat-typography">
+
+<div class="row">
+  <div class="col-md-12">
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Kargo Durumu</mat-label>
+        <mat-select (selectionChange)="onNgModelChange($event.value)">
+          <mat-option #phoneSituation *ngFor="let situation of listOfPhoneSituations" [value]="situation">
+            {{situation.phoneSituation}}
+        </mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>
+</div>
+
+
+ </mat-dialog-content>
+ <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="updateSituation()">Kaydet</button>
+   <button mat-button color="warn" mat-dialog-close>Kapat</button>
+ </mat-dialog-actions>
+ 
+ 
+ 
+ 
+ 
+  
+ 

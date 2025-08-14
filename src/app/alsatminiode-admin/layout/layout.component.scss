@@ -1,0 +1,35 @@
+.admin-container {
+    margin:0px;
+    width: 100%;
+    height: 870px;
+    border: 1px solid #555;
+}
+.admin-left{
+  width: 15%;
+}
+
+mat-toolbar{
+  background : #5e70d4;
+  color : white;
+  margin:0px;      
+}
+mat-sidenav{
+  margin-right : 16px;
+  margin-top:0px;
+  margin-left : 0px;
+  margin-bottom:0px;
+  width : 250px;
+  border-right : none;
+  background : #3f51b5;
+  color:white;
+  padding : 10px;
+  text-align : center;
+}
+.content{
+  height : calc(100vh - 98px);
+  margin : 16px;
+  margin-left : 32px;
+}
+mat-sidenav-container{
+  height : calc(100vh - 65px);
+}

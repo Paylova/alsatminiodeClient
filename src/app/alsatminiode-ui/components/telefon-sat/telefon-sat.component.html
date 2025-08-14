@@ -1,0 +1,296 @@
+<div>
+
+  <mat-stepper orientation="horizontal" linear #stepper>
+    <mat-step  label="Marka Seçimi" [stepControl]="phoneBrandCTRL">
+      <form>
+
+        <div class="blog--section pd--100-0-40">
+          <div class="container">
+              <div class="blog--content col-md-12 pb--60 float--right">
+                  <div class="row MasonryRow">
+                      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col-xxs-12" *ngFor="let brand of listOfBrands"  (click)="getBrand(brand,brand.id,brand.brandName,stepper)" style="cursor:pointer">
+                          <div class="post--item sticky">
+                              <div class="" style="width:200px;height:200px;display: block; margin: auto;padding:25px">
+                                  <img [src]="filterBrandImage(brand.id,images)">                                               
+                              </div>
+                              <br>
+                              <div class="post--content" style="text-align: center;font-size:20px;color:black">
+                                  <p>{{brand.brandName}}</p>
+                              </div>
+
+                              <div class="post--footer">
+                                  <a class="btn btn-default">Hemen Sat</a>
+                              </div>
+                          </div>
+                      </div>                         
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+
+
+      </form>
+    </mat-step>
+    <mat-step label="Model Seçimi" [stepControl]="phoneModelCTRL">
+      <div class="container">
+        <mat-form-field appearance="standard" class="mat-filter" style="width: 100%;">
+          <mat-label>İstediğin {{brandName}} modelini yazarak filtreleyebilirsin.</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Model Arayın" #input>
+        </mat-form-field>
+      </div>
+
+      <div class="blog--section pd--100-0-40">
+        <div class="container">
+          <div class="section--title">
+            <h2 class="h2">{{brandName}} Modelleri</h2>
+          </div>
+            <div class="blog--content col-md-12 pb--60 float--right">
+                <div class="row MasonryRow">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col-xxs-12" *ngFor="let model of filteredListOfModels | async" (click)="getModel(model,model.id,stepper)" style="cursor:pointer">
+
+                        <div class="post--item sticky">
+                            <div style="width:150px;height:150px;display: block; margin: auto;padding: 15px;">
+                                <img [src]="'/api/'+model.phoneModelImageFile[0].filePath">
+                            </div>
+
+                            <div class="post--content" style="text-align: center;font-size:20px;color:black">
+                                <p>{{model.modelName}}</p>
+                            </div>
+
+                            <div class="post--footer">
+                                <a class="btn btn-default">Hemen Sat</a>
+                            </div>
+                        </div>
+
+                    </div>                         
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </mat-step>
+    <mat-step [stepControl]="questions" label="Değerlendirme" state="chat">
+
+      <form [formGroup]="questions">
+        
+        <div style="height:350px;width:250px;background-color:white;color:black;padding:10px;border-style:solid;border-radius: 25px;border-width: 0.5px;border-color:#343434;box-shadow: 0 3px 30px rgba(0, 0, 0, 0);margin:auto" class="d-flex justfiy-content-center">
+          <div style="width:150px;height:150px;display: block; margin: auto;">
+            <img *ngIf="selectedModel != null" [src]="'/api/'+selectedModel.phoneModelImageFile[0].filePath">
+          </div>
+          <div style="text-align: center;font-size: 20px;" *ngIf="selectedModel != null">{{brandName}}</div>
+          <br>
+          <div style="text-align:center;font-size:18px" *ngIf="selectedModel != null">{{selectedModel.modelName}}</div>
+          <br>
+          <div style="text-align: center;color:red;font-size:18px">Ön Teklif Tutarı</div>
+          <div class="post--footer">
+            <a class="btn btn-default" style="font-size:large;background-color:transparent;color:black;cursor:default;width:100%">{{currentWorth}} ₺ </a>
+          </div>
+        </div>
+
+        <br>
+
+
+
+
+        <div class="row">
+   
+          <hr>
+          <div class="col-md-12">
+            <div style="text-align: center;">
+              <h3>Cihaz Kapasitesi Seçiniz</h3>
+            </div>
+            <div style="text-align: center;">
+              <fieldset id="capacity" >
+                <div>
+                  <label *ngFor="let phoneModelCapacity of listOfPhoneModelCapacity" style="border-style:solid;margin:10px;border-radius: 15px;width:100px;border-color:#7e7d7d;border-width: 0.5px;">
+                    <input type="radio" name="field1" [value]="phoneModelCapacity.id" (change)="OnPhoneModelCapacityChange(phoneModelCapacity)" [checked]="phoneModelCapacity.phoneModelCapacityPrice == 0 ? 'checked' : ''"/>
+                    <label style="padding:5px;font-size: 18px;">{{phoneModelCapacity.phoneModelCapacityName}}</label>
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <hr>
+          <div>
+            <div class="col-md-6" *ngFor="let phoneCost of listOfPhoneCosts">
+              <div>
+                <div style="text-align:center" >
+                  <label>{{ phoneCost.phoneQuestion.questionText }}</label>
+                </div>
+                <div style="text-align:center;">  
+                  
+                  <div style="text-align:center;" class="d-flex justify-content-center">  
+                  
+                    <fieldset [id]="phoneCost" class="donate-now">
+                      <div class="toggle">
+                        <input type="radio"[name]="phoneCost.id" [value]="phoneCost.id" [id]="phoneCost.id" (change)="radioYes(phoneCost)" />
+                        <label [for]="phoneCost.id">Evet</label>
+                        <input type="radio" [name]="phoneCost.id" [value]="phoneCost.id" [id]="phoneCost.id + 'A'" checked="checked" (change)="radioNo(phoneCost)"/>
+                        <label [for]="phoneCost.id + 'A'">Hayır</label>
+                      </div>
+                    </fieldset>
+  
+                  </div>    
+
+                </div>    
+              </div>
+              <hr>
+            </div>
+          </div>
+          <div class="col-md-6" style="text-align: center;">
+              <mat-card style="margin-top:20px">
+                <mat-card-title >Miniöde Hediye Çeki <mat-icon style="margin-left:5px">shopping_basket</mat-icon></mat-card-title>
+                <mat-card-title style="color:yellowgreen">{{currentWorth * couponRate | number: '1.0-0'}} ₺</mat-card-title>
+                <mat-card-actions>
+                  <mat-radio-button (change)="OptionMini()" checked="true"></mat-radio-button>
+                </mat-card-actions>
+              </mat-card>
+          </div>
+          <div class="col-md-6" style="text-align: center;">         
+            <mat-card style="margin-top:20px">
+              <mat-card-title style="text-align: center;">Banka Havalesi / EFT 	<mat-icon style="margin-left:5px">money</mat-icon></mat-card-title>
+              <mat-card-title style="color:yellowgreen">{{ currentWorth | number: '1.0-0'}} ₺</mat-card-title>
+              <mat-card-actions>
+              <mat-radio-button (change)="OptionEFT()"></mat-radio-button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <br>
+          <div [ngClass]="option == false ? 'col-md-6' : 'col-md-6'" style="margin-top:20px">
+            <mat-form-field appearance="fill" class="model-full-input">
+              <mat-label>IMEI Numarası</mat-label>
+              <input matInput required="true" mask="000000000000000" [showMaskTyped]="true" placeHolderCharacter="" formControlName="imeiNumber" #customerPhoneIMEI>
+            </mat-form-field> 
+          </div>
+          <div [ngClass]="option == true ? 'col-md-6' : 'col-md-6'" style="margin-top:20px">
+            <mat-form-field appearance="fill" class="model-full-input">
+              <mat-label>IBAN Numaranız</mat-label>
+              <input matInput mask="000000000000000000000000" prefix="TR" [showMaskTyped]="true" placeHolderCharacter="" formControlName="ibanNumber" #customIBAN >
+            </mat-form-field> 
+          </div>
+          <div class="col-md-12">
+            <mat-form-field appearance="fill" class="model-full-input">
+              <mat-label>Kullanılmayan Fonsiyonları</mat-label>
+              <textarea matInput placeholder="Cihazın kullanılmayan fonksiyonlarını giriniz." #customerPhoneDescription></textarea>
+            </mat-form-field>
+          </div>
+          <mat-card-actions class="card-center" style="text-align: center">
+            <button
+            mat-raised-button
+            color="warn"
+            disabled="false"
+            matStepperPrevious
+          >
+            Geri
+          </button>
+            <button mat-raised-button matStepperNext>İleri</button>
+          </mat-card-actions>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="personalInfo" label="Kişisel Bilgiler">
+      <form [formGroup]="personalInfo">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="model-full-input" appearance="fill">
+              <mat-label>Ad</mat-label>
+              <input matInput placeholder="Adınız" formControlName="customerName" #customerName  />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="model-full-input" appearance="fill">
+              <mat-label>Soyad</mat-label>
+              <input matInput placeholder="Soyadınız" formControlName="customerSurname" #customerSurname/>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12">
+            <mat-form-field class="model-full-input" appearance="fill">
+              <mat-label>Tc Kimlik Numarası</mat-label>
+              <input matInput
+               placeholder="TC Kimlik Numaranız" mask="00000000000" 
+               [showMaskTyped]="true" placeHolderCharacter="" 
+               formControlName="customerTC"
+               id="tckontrol" #customerTC />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="model-full-input" appearance="fill">
+              <mat-label>E-mail</mat-label>
+              <input matInput placeholder="E-mail adresiniz" type="email" email="true" formControlName="customerEmail" #customerMail/>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="model-full-input" appearance="fill">
+              <mat-label>Telefon</mat-label>
+              <input matInput mask="(000) 000-0000" prefix="+90" [showMaskTyped]="true" placeHolderCharacter="_" placeholder="Telefon Numaranız" formControlName="customerGSM" #customerGSM />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" class="model-full-input">
+              <mat-label>Ülke</mat-label>
+              <mat-select (selectionChange)="onNgModelChangeCountry($event.value)" formControlName="customerCountry">
+                <mat-option #countryName *ngFor="let country of listOfCountries" [value]="country">
+                  {{country.countryName}}
+              </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" class="model-full-input">
+              <mat-label>Şehir</mat-label>
+              <mat-select (selectionChange)="onNgModelChangeCity($event.value)" formControlName="customerCity">
+                <mat-option #cityName *ngFor="let city of listOfCities" [value]="city">
+                  {{city.cityName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" class="model-full-input">
+              <mat-label>İlçe</mat-label>
+              <mat-select (selectionChange)="onNgModelChangeDistrict($event.value)" formControlName="customerDistrict">
+                <mat-option #cityName *ngFor="let district of listOfDistrict" [value]="district" >
+                  {{district.districtName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="fill" class="model-full-input">
+              <mat-label>Kargo Firması Seçiniz</mat-label>
+              <mat-select (selectionChange)="onNgModelChangeCompany($event.value)" formControlName="shippingCompany">
+                <mat-option #shippingCompany *ngFor="let shippingCompany of listOfShippingCompanies" [value]="shippingCompany">
+                  {{shippingCompany.companyName}}
+              </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12">
+            <mat-form-field class="model-full-input" appearance="fill">
+              <mat-label>Adres</mat-label>
+              <textarea matInput placeholder="Sokak Cadde Mahalle" formControlName="customerAddress" #customerAddress></textarea>
+            </mat-form-field>
+            <div style="text-align: center;">
+              <mat-checkbox class="form-checkbox-css" (change)="checkValueAgreement(isCheckedAgreement? 'A': 'B')" formControlName="thirdCtrl"></mat-checkbox>
+              <a class="form-text-css"
+              (click)="openAgreement()" style="cursor:help">Kullanım Koşulları</a>nı okudum ve kabul ediyorum.
+            </div>
+            <div style="text-align: center;">
+              <mat-checkbox class="form-checkbox-css" (change)="checkValueProtection(isCheckedProtection? 'A': 'B')" formControlName="thirdCtrl"></mat-checkbox>
+              Kampanyalardan haberdar olmak için<a class="form-text-css"
+              (click)="openProtection()" style="cursor:help">Kişisel Verilerin Korunması Kanunu </a>kapsamında iletişim bilgilerimin kullanılmasını onaylıyorum.
+            </div>
+          </div>
+          <hr>
+          <div class="col-md-12">
+            <button mat-raised-button color="primary" class="model-full-input" (click)="sendCustomer(customerPhoneIMEI,customIBAN,customerPhoneDescription,customerName,customerSurname,customerTC,customerMail,customerGSM,customerAddress)" >Cihazını Gönder</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+  
+</div>

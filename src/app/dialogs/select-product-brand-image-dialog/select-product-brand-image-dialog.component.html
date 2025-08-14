@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Telefon Model Fotoğrafları</h2>
+<mat-dialog-content class="mat-typography">
+    <app-file-upload [options]="options"></app-file-upload>
+
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4" *ngFor="let image of images" >
+            <mat-card class="phoneModel-image-card">
+                <mat-card-header>
+                </mat-card-header>
+                <img mat-card-image [src]="image.filePath">
+                <mat-card-actions>
+                  <button mat-raised-button color="warn" (click)="deleteImage(image.id,$event)">Sil</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
